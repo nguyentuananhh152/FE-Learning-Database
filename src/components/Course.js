@@ -39,6 +39,9 @@ import { Input } from '@material-ui/icons';
   const toExercise = () => {
     window.location.replace('/Exercise')
   }
+const profile = () => {
+    window.location.replace('/profile')
+}
   
   const Course = () => {
     const[Course, setListLesson]=useState([])
@@ -76,7 +79,7 @@ import { Input } from '@material-ui/icons';
                 style={{
                   fontWeight: "bold",
                 }}
-              >Khóa Học</Button>
+              >Courses</Button>
             </Typography>
             <Stack spacing={3} direction="row"
                 style={{
@@ -85,9 +88,8 @@ import { Input } from '@material-ui/icons';
                     justifyContent: "center",
                   }}
             >
-                <SearchIcon />
                 <NotificationsIcon></NotificationsIcon>
-                <AccountCircleIcon></AccountCircleIcon>
+                <AccountCircleIcon onClick={profile}></AccountCircleIcon>
             </Stack>
           </Toolbar>
         </AppBar>
@@ -108,7 +110,7 @@ import { Input } from '@material-ui/icons';
                     overflowY: "scroll",
                 }}
             >
-                <h2>SQL Cơ bản</h2>
+                <h2>Basic SQL</h2>
                 {Course.map((w,index)=>{
                     return <Stack spacing={2} direction="row"
                             style={{
@@ -162,7 +164,7 @@ import { Input } from '@material-ui/icons';
                             margin: "10px",
                         }}
                         onClick={toExercise}
-                    >Bài Tập</Button>
+                    >Exercises</Button>
                     <div style={{
                         display: "flex",
                         flexDirection: "row",
@@ -173,7 +175,7 @@ import { Input } from '@material-ui/icons';
                                 color: "white",
                                 backgroundColor: "#157EFB",
                             }}
-                        >Trước</Button>
+                        >Pre</Button>
                         <Button
                             style={{
                                 color: "white",
@@ -181,12 +183,12 @@ import { Input } from '@material-ui/icons';
                                 position: "absolute",
                                 right: "0px", 
                             }}
-                        >Tiếp theo</Button>
+                        >Next</Button>
 
                     </div>
                 </div>
                 <div>
-                    <h3>Đánh giá</h3>
+                    <h3>Reviews</h3>
                     <div
                         style={{
                             backgroundColor: "#D9D9D9",
@@ -194,12 +196,16 @@ import { Input } from '@material-ui/icons';
                             padding: "10px",
                         }}
                     >
-                    <Stack spacing={3} direction="row"
-                    >
+                    <Stack spacing={3} direction="row">
                         <AccountCircleIcon></AccountCircleIcon>
-                        <p>UserName</p>
+                        <p>UserName1</p>
+                        <p>Hahaha hahahah hahahah hahah haha hahah hahaha hahaha Vip pro</p>
                     </Stack>
-                    <p>Đánh giá của người dùng</p>
+                        <Stack spacing={3} direction="row">
+                            <AccountCircleIcon></AccountCircleIcon>
+                            <p>UserName2</p>
+                            <p>hihihi huhu hoho hsfdghsf</p>
+                        </Stack>
                     </div>
                     <div
                         style={{
@@ -228,7 +234,7 @@ import { Input } from '@material-ui/icons';
                             right: "0px", 
                             margin: "10px",
                             
-                        }}>Gửi</Button>
+                        }}>Submit</Button>
                     </div>
                 </div>
 

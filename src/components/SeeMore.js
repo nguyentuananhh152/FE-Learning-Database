@@ -38,18 +38,21 @@ import { Link } from 'react-router-dom';
   const listcourse = () => {
     window.location.replace('/listcourse')
   }
+const profile = () => {
+    window.location.replace('/profile')
+}
   
   const SeeMore = () => {
-    const[SeeMore, setListLesson]=useState([])
+    const[Course, setCourse]=useState([])
 
     useEffect(()=> {
-        const urlOnline = `https://web-service-back-end-group-3-cnpm.onrender.com/get-list-lesson?id=1`;
+        const urlOnline = `https://web-service-back-end-group-3-cnpm.onrender.com/get-course?id=1`;
         const url = `http://localhost:8081/get-list-lesson?id=1`
         fetch(urlOnline)
           .then(res => res.json())
           .then((result) => {
-              setListLesson(result);
-              console.log(SeeMore);
+              setCourse(result);
+              console.log(Course);
           }
       )
     },[])
@@ -74,7 +77,7 @@ import { Link } from 'react-router-dom';
                 style={{
                   fontWeight: "bold",
                 }}
-              >Khóa Học</Button>
+              >Courses</Button>
             </Typography>
             <Stack spacing={3} direction="row"
                 style={{
@@ -83,9 +86,8 @@ import { Link } from 'react-router-dom';
                     justifyContent: "center",
                   }}
             >
-                <SearchIcon />
                 <NotificationsIcon></NotificationsIcon>
-                <AccountCircleIcon></AccountCircleIcon>
+                <AccountCircleIcon onClick={profile}></AccountCircleIcon>
             </Stack>
           </Toolbar>
         </AppBar>
@@ -96,7 +98,7 @@ import { Link } from 'react-router-dom';
                 margin: "40px",
             }}
         >
-            <h1 style={{fontSize: "40px"}}>Khóa Học SQL cơ bản</h1>
+            <h1 style={{fontSize: "40px"}}>Basic SQL</h1>
             <div
                 style={{
                     width: "100vw",
@@ -104,7 +106,7 @@ import { Link } from 'react-router-dom';
                     marginTop: "40px",
                 }}
             >
-                <h2>Bạn sẽ học được gì?</h2>
+                <h2>What will you learn?</h2>
                 <div 
                     style={{
                         width: "700px",
@@ -115,9 +117,7 @@ import { Link } from 'react-router-dom';
                         padding: "10px",
                     }}
                 >
-                    <p>Giúp bạn hiểu rõ bản chất SQL, tính ứng dụng, phân loại phổ biến trong thực tế, các lưu ý trong SQL cần nhớ.</p>
-                    <p>Biết được các câu lệnh từ cơ bản trong SQL như Select, chọn dữ liệu không trùng nhau với DISTINCT. Biết được tư duy tìm kiếm, sắp xếp, tính toán, tối ưu hóa thao tác một cách thuần thục.</p>
-                    <p>Bạn sẽ được học và thực hành từ các bài toán SQL trong mỗi bài học</p>
+                    <p>{Course.description}</p>
 
                 </div>
             </div>
@@ -127,38 +127,6 @@ import { Link } from 'react-router-dom';
                     marginLeft: "80px",
                 }}
             >
-                <h2>Nội dung khóa học</h2>
-                <div 
-                    style={{
-                        width: "700px",
-                        height: "500px",
-                        marginLeft: "80px",
-                        marginTop: "40px",
-                        borderStyle: "solid",
-                        borderColor: "black",
-                        padding: "10px",
-                        display:"auto",
-                        overflow: "scroll",
-                    }}
-                >
-                  
-                    {SeeMore.map((w,index)=>{
-                      return <Stack spacing={2} direction="row"
-                              style={{
-                                marginLeft: "20px",
-                                marginTop: "10px",
-                              }}
-                            >
-                              <div>{w.name}</div>
-                              <div>{w.content}</div>
-                            </Stack>
-                    },
-                    )}
-                  
-                  
-                    
-
-                </div>
             </div>
         </div>
         

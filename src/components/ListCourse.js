@@ -84,7 +84,7 @@ const profile = () => {
                 style={{
                   fontWeight: "bold",
                 }}
-              >Khóa Học</Button>
+              >Courses</Button>
             </Typography>
             <Stack spacing={3} direction="row"
                 style={{
@@ -93,7 +93,6 @@ const profile = () => {
                     justifyContent: "center",
                   }}
             >
-                <SearchIcon />
                 <NotificationsIcon></NotificationsIcon>
                 <AccountCircleIcon onClick={profile}></AccountCircleIcon>
             </Stack>
@@ -114,8 +113,8 @@ const profile = () => {
                             <img style={{ width: 350, height: 300, marginRight: 50,}} src={w.image}/>
                         
                             <Stack spacing={2} direction="row">
-                                <Button variant="contained" onClick={toCourse}>Đăng ký</Button>
-                                <Button variant="outlined" onClick={toSeeMore}>Xem thêm</Button>
+                                <Button variant="contained" onClick={toCourse}>Register</Button>
+                                <Button variant="outlined" onClick={toSeeMore}>Detail</Button>
                             </Stack>
                     
                 </divCourse>

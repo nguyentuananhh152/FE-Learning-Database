@@ -13,6 +13,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from "@mui/icons-material/Search";
 import Stack from '@mui/material/Stack';
 import logo from './SQL_logo.png'
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -44,6 +45,15 @@ const accountmanagement = () => {
 const notificationmanagement = () => {
     window.location.replace('/notificationmanagement')
 }
+
+const profile = () => {
+    window.location.replace('/admin/profile')
+}
+
+const login = () => {
+    window.location.replace('/admin/login')
+}
+
 
 const HomeAdmin = () => {
     const classes = useStyles();
@@ -91,7 +101,7 @@ const HomeAdmin = () => {
                             placeholder="Search"
                             style={{
                                 marginLeft: 30,
-                                width:"30vw",
+                                width:"25vw",
                                 height: "3vh",
                                 backgroundColor: "white",
                                 display: "flex",
@@ -107,6 +117,10 @@ const HomeAdmin = () => {
                         <IconButton type="submit" aria-label="search">
                             <SearchIcon></SearchIcon>
                         </IconButton>
+                    </Stack>
+                    <Stack spacing={2} direction="row">
+                        <Button variant="outlined" onClick={login}>Login</Button>
+                        <AccountCircleIcon onClick={profile}></AccountCircleIcon>
                     </Stack>
                 </Toolbar>
             </AppBar>

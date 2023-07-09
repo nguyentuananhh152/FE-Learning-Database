@@ -162,7 +162,7 @@ const LessonManagement = () => {
                                     color: "white",
                                     backgroundColor: "#157EFB",
                                 }}
-                            >Trước</Button>
+                            >pre</Button>
                             <Button
                                 style={{
                                     color: "white",
@@ -170,7 +170,7 @@ const LessonManagement = () => {
                                     position: "absolute",
                                     right: "0px",
                                 }}
-                            >Tiếp theo</Button>
+                            >Next</Button>
 
                         </div>
                     </div>

@@ -70,7 +70,7 @@ const Home = () => {
               style={{
                 fontWeight: "bold",
               }}
-            >Khóa Học</Button>
+            >Courses</Button>
           </Typography>
             <Stack spacing={2} direction="row" border={0} style={{marginLeft:20, marginRight: 150, borderRadius: 15}}>
                 <TextField
@@ -97,8 +97,8 @@ const Home = () => {
                 </IconButton>
             </Stack>
           <Stack spacing={2} direction="row">
-              <Button variant="contained" onClick={sigup} >Đăng ký</Button>
-              <Button variant="outlined" onClick={login}>Đăng nhập</Button>
+              <Button variant="contained" onClick={sigup} >Register</Button>
+              <Button variant="outlined" onClick={login}>Login</Button>
               <AccountCircleIcon onClick={profile}></AccountCircleIcon>
           </Stack>
         </Toolbar>

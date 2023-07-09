@@ -81,7 +81,7 @@ export default function LoginAdmin() {
                             sx={{ mt: 3, mb: 2 }}
                             onClick={homeadmin}
                         >
-                            Sign In
+                            Login
                         </Button>
                     </Box>
                 </Box>

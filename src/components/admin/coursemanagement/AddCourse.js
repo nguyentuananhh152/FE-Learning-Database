@@ -115,7 +115,7 @@ const AddCourse = () => {
                 </div>
             </Container>
             <div style={{width:"auto", height:300, textAlign:"right", backgroundColor:"#efd3d7"}}>
-                <Button style={{fontSize:15, width:110, height:45, marginRight:100, marginTop: 100, backgroundColor: "blue", borderRadius:20} }><p style={{color:"white"}} onClick={coursemanagement}>Gửi</p></Button>
+                <Button style={{fontSize:15, width:110, height:45, marginRight:100, marginTop: 100, backgroundColor: "blue", borderRadius:20} }><p style={{color:"white"}} onClick={coursemanagement}>Submit</p></Button>
             </div>
         </div>
 

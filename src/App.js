@@ -27,6 +27,8 @@ import EditProfile from "./containers/profile/EditProfile";
 import EditCourse from "./components/admin/coursemanagement/EditCourse";
 import NotificationManagement from "./components/admin/notificationmanagement/NotificationManagement";
 import AccountManagement from "./components/admin/accountmanagement/accountmanagement";
+import AdminEditProfile from "./components/admin/profile/EditProfile";
+import AdminProfile from "./components/admin/profile/Profile";
 
 
 // import NotFound from "./components/NotFound";
@@ -49,6 +51,8 @@ function App() {
               <Route path="/profile/edit" element={<EditProfile/>} />
 
             {/*  admin*/}
+              <Route path="/admin/profile" element={<AdminProfile/>} />
+              <Route path="/admin/profile/edit" element={<AdminEditProfile/>} />
               <Route path="/admin/login" element={<LoginAdmin/>} />
               <Route path="/admin/home" element={<HomeAdmin/>} />
 
