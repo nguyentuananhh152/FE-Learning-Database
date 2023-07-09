@@ -40,6 +40,9 @@ import { Link } from 'react-router-dom';
   const listcourse = () => {
     window.location.replace('/listcourse')
   }
+const profile = () => {
+    window.location.replace('/profile')
+}
   const toSeeMore = () =>{
     window.location.replace('/SeeMore')
   }
@@ -92,7 +95,7 @@ import { Link } from 'react-router-dom';
             >
                 <SearchIcon />
                 <NotificationsIcon></NotificationsIcon>
-                <AccountCircleIcon></AccountCircleIcon>
+                <AccountCircleIcon onClick={profile}></AccountCircleIcon>
             </Stack>
           </Toolbar>
         </AppBar>

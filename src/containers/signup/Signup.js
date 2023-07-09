@@ -1,69 +1,143 @@
-import React, { useState } from 'react'
-import {Link} from 'react-router-dom'
-import {Wrapper, PopupLoginWrapper, Text, Row, Input, Button, Blank, Button2, Header} from './signupStyle'
-import logo from '../login/logo.jpg'
+import * as React from 'react';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import CssBaseline from '@mui/material/CssBaseline';
+import TextField from '@mui/material/TextField';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import Link from '@mui/material/Link';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-const Signup = () => {
-  const [state, setState] = useState({
-    userName: '',
-    password: 0,
-  })
 
-  const signup = () => {
-    const params = {
-      userName: state.userName,
-      password: state.password,
-    }
-  }
+// TODO remove, this demo shouldn't need to reset the theme.
 
-  const handleUserName = (event) => {
-    setState({ ...state, userName: event.target.value })
-  }
+const defaultTheme = createTheme();
 
-  const handlePassword = (event) => {
-    setState({ ...state, password: event.target.value })
-  }
-
-  return (
-    <Wrapper>
-    <Header>
-      <Link to="/">
-        <Button2>
-          <img src={logo} width='150px'/>
-        </Button2>
-      </Link>
-    </Header>
-      <PopupLoginWrapper>
-        <Text color="#292929" fontSize={22} fontWeight="bold" paddingBottom={1} width="fit-content" paddingTop={1}>
-            Đăng ký
-        </Text>
-        <Row>
-          <Text color="#4F4F4F" fontSize={18}>
-            Tên đăng ký
-          </Text>
-          <Input value={state.userName} onChange={handleUserName} />
-        </Row>
-        <Blank height={0.2} width="fit-content"/>
-        <Row>
-          <Text color="#4F4F4F" fontSize={18}>
-            Mật khẩu
-          </Text>
-          <Input
-            //value={state.password}
-            onChange={handlePassword}
-            type="password"
-          />
-        </Row>
-        <Link to="/login" style={{alignSelf: 'center'}}>
-          <Button>
-              <Text color="#FFFFFF" fontSize={16}>
-                  Đăng ký
-              </Text>
-          </Button>
-        </Link>
-      </PopupLoginWrapper>
-    </Wrapper>
-  )
+const login = () => {
+  window.location.replace('/login')
 }
 
-export default Signup
+export default function SignUp() {
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    console.log({
+      email: data.get('email'),
+      password: data.get('password'),
+    });
+  };
+
+  return (
+      <ThemeProvider theme={defaultTheme}>
+        <Container component="main" maxWidth="xs">
+          <CssBaseline />
+          <Box
+              sx={{
+                marginTop: 8,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+              }}
+          >
+            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+              <LockOutlinedIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+              Sign up
+            </Typography>
+            <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+              <Grid container spacing={2}>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                      autoComplete="given-name"
+                      name="firstName"
+                      required
+                      fullWidth
+                      id="firstName"
+                      label="First Name"
+                      autoFocus
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                      required
+                      fullWidth
+                      id="lastName"
+                      label="Last Name"
+                      name="lastName"
+                      autoComplete="family-name"
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                      required
+                      fullWidth
+                      id="email"
+                      label="Email Address"
+                      name="email"
+                      autoComplete="email"
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                      required
+                      fullWidth
+                      id="age"
+                      label="Age"
+                      name="age"
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                      required
+                      fullWidth
+                      id="username"
+                      label="Username"
+                      name="username"
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                      required
+                      fullWidth
+                      name="password"
+                      label="Password"
+                      type="password"
+                      id="password"
+                      autoComplete="new-password"
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <FormControlLabel
+                      control={<Checkbox value="allowExtraEmails" color="primary" />}
+                      label="I want to receive inspiration, marketing promotions and updates via email."
+                  />
+                </Grid>
+              </Grid>
+              <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  sx={{ mt: 3, mb: 2 }}
+                  onClick={login}
+              >
+                Sign Up
+              </Button>
+              <Grid container justifyContent="flex-end">
+                <Grid item>
+                  <Link href="#" variant="body2" onClick={login}>
+                    Already have an account? Sign in
+                  </Link>
+                </Grid>
+              </Grid>
+            </Box>
+          </Box>
+        </Container>
+      </ThemeProvider>
+  );
+}

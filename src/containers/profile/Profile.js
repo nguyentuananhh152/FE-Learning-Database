@@ -1,84 +1,181 @@
-import React from 'react'
-import {Link} from 'react-router-dom'
-import {Wrapper, Button2, Button3, Text, Button, Button4, Button5, Header, Left, Main, Button6, 
-        Content, Button7, Button8, Button9, Button10} from './profileStyle'
-import logo from '../login/logo.jpg'
-import account from './baseline_account_circle_black_24dp.png'
-import notify from './baseline_notifications_black_24dp.png'
-import search from './outline_search_black_18dp.png'
-import avatar from './avatar.png'
-import basic from './SQL_CB.png'
-import advance from './SQL_NC.png'
+import React, { Component } from "react";
+import './Profile.css';
+import avatarDefault from './avatar.png'
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import {Button} from "@mui/material";
+import logo from "../../img/SQL_logo.png";
+import AppBar from "@material-ui/core/AppBar";
 
-const Profile = () => {
-  return (
-    <Wrapper>
-        <Header>
-            <Button2>
-                <img src={logo} width='150px'/>
-            </Button2>
-            <Button3>
-                <Text color="#000000" fontSize={18}>
-                    Khóa học
-                </Text>
-            </Button3>
-            <Button5>
-                <img src={search} width='40px'/>
-            </Button5>
-            <Button>
-                <img src={notify} width='50px'/>
-            </Button>
-            <Button4>
-                <img src={account} width='50px'/>
-            </Button4>
-        </Header>
-        <hr style={{width: '100%', border: '1.5px solid #000000'}}/>
-        <Content>
-            <Left>
-                <Button2>
-                    <img src={avatar} width='150px'/>
-                </Button2>
-                <Text color="#4F4F4F" fontSize={20} paddingTop={0.2} paddingBottom={1}>
-                        Tên đăng nhập
-                </Text>
-                <Link to="edit">
-                    <Button6>
-                        <Text color="#000000" fontSize={16} fontWeight='bold'>
-                            Sửa
-                        </Text>
-                    </Button6>
-                </Link>
-            </Left>
-            <Main>
-                <Button7>
-                    <Text color="#000000" fontSize={22}>
-                        Khóa học của tôi
-                    </Text>
-                </Button7>
-                <Header>
-                    <Button8>
-                        <Text color="#000000" fontSize={40}>
-                            SQL cơ bản
-                        </Text>
-                    </Button8>
-                    <Button8>
-                        <Text color="#000000" fontSize={40}>
-                            SQL nâng cao
-                        </Text>
-                    </Button8>
-                </Header>
-                <Header>
-                    <Button9>
-                        <img src={basic} width='300px'/>
-                    </Button9>
-                    <Button10>
-                        <img src={advance} width='300px'/>
-                    </Button10>
-                </Header>
-            </Main>
-        </Content>
-    </Wrapper>
-  )
+
+const edit = () => {
+    window.location.replace('/profile/edit')
 }
 
-export default Profile
+const home = () => {
+    window.location.replace('/')
+}
+export class Profile extends Component {
+
+
+    imageHandler = (e) => {
+        const reader = new FileReader();
+        reader.onload = () => {
+            if (reader.readyState === 2) {
+                this.setState({ profileImg: reader.result });
+            }
+        };
+        reader.readAsDataURL(e.target.files[0]);
+    };
+    render() {
+
+        return (
+            <div className="p-body row" style={{textAlign:"center"}}>
+                <AppBar position="static" color='white'>
+                    <Toolbar>
+                        <Typography variant="h6" >
+                            <Button onClick={home}>
+                                <img src={logo} width='100px'/>
+                            </Button>
+                        </Typography>
+                    </Toolbar>
+                </AppBar>
+                <div className="col-lg-5 col-md-6" style={{
+                    width: "100vw",
+                    height:"60vh",
+                    display: "flex",
+                    alignSelf: "center",
+                    justifyContent: "center",
+                    flexDirection: "column"}}>
+                    <div className="p-card card h-100" style={{marginRight:"auto", marginLeft:"auto", marginTop:50, width:"30vw", height:"30vw", borderRadius:50, boxShadow: "1px 3px 1px #9E9E9E"}}>
+                        <div className="card-body" style={{marginTop:20}}>
+                            <div className="account-settings">
+                                <div className="user-profile">
+                                    <div class="user-avatar">
+                                        <img src={avatarDefault} alt="" id="img" className="img" />
+                                    </div>
+
+                                    <table
+                                        style={{
+                                            width:"20vw",
+                                            textAlign:"left",
+                                            marginRight:"auto",
+                                            marginLeft: "auto",
+                                            marginTop:20,
+
+                                        }}>
+                                        <tr>
+                                            <td style={{width:"6vw"}}>
+                                                <label
+                                                    htmlFor="fname"
+                                                    style={{color: "#000000"}}
+                                                    className="form-label"
+                                                    style={{
+                                                        fontWeight: "bold",
+                                                    }}
+                                                >
+                                                    ID
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <u>ID</u>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label
+                                                    htmlFor="fname"
+                                                    style={{color: "#000000"}}
+                                                    className="form-label"
+                                                    style={{
+                                                        fontWeight: "bold",
+                                                    }}
+                                                >
+                                                    Name
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <u>Name</u>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label
+                                                    htmlFor="email"
+                                                    style={{color: "#000000"}}
+                                                    className="form-label"
+                                                    style={{
+                                                        fontWeight: "bold",
+                                                    }}
+                                                >
+                                                    Email
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <u>Email</u>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label
+                                                    htmlFor="email"
+                                                    style={{color: "#000000"}}
+                                                    className="form-label"
+                                                    style={{
+                                                        fontWeight: "bold",
+                                                    }}
+                                                >
+                                                    Age
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <u>Age</u>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label
+                                                    htmlFor="address"
+                                                    style={{color: "#000000"}}
+                                                    className="form-label"
+                                                    style={{
+                                                        fontWeight: "bold",
+                                                    }}
+                                                >
+                                                    Address
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <u>Address</u>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <button className="btn btn-outline-dark" onClick={edit} style={{marginTop:40}}>
+                                    Edit
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    style={{
+                    width: "100vw",
+                    height:"40vh",
+                    display: "flex",
+                    alignSelf: "center",
+                    justifyContent: "center",
+                    flexDirection: "column",
+
+                }}>
+
+                    <div className="d-grid gap-2" style={{marginTop:40}}>
+
+                    </div>
+                </div>
+            </div>
+        );
+    }
+}
+
+export default Profile;

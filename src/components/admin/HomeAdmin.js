@@ -67,23 +67,47 @@ const HomeAdmin = () => {
                                 style={{
                                     fontWeight: "bold",
                                 }}
-                        >Quản Lý Khóa Học</Button>
+                        >Course Management</Button>
                         <Button color="inherit" onClick={lessonmanagement}
                                 style={{
                                     fontWeight: "bold",
                                 }}
-                        >Quản Lý Bài Học</Button>
+                        >Lesson Management</Button>
                         <Button color="inherit" onClick={accountmanagement}
                                 style={{
                                     fontWeight: "bold",
                                 }}
-                        >Quản Lý Tài Khoản</Button>
+                        >Account Management</Button>
                         <Button color="inherit" onClick={notificationmanagement}
                                 style={{
                                     fontWeight: "bold",
                                 }}
-                        >Quản Lý Thông Báo</Button>
+                        >Notification Management</Button>
                     </Typography>
+                    <Stack spacing={2} direction="row" border={0} style={{marginLeft:20, marginRight: 150, borderRadius: 15}}>
+                        <TextField
+                            id="search-bar"
+                            className="text"
+                            placeholder="Search"
+                            style={{
+                                marginLeft: 30,
+                                width:"30vw",
+                                height: "3vh",
+                                backgroundColor: "white",
+                                display: "flex",
+                                alignSelf: "center",
+                                justifyContent: "center",
+                            }}
+                            InputProps={{
+                                style: {
+                                    borderRadius: "30px",
+                                }
+                            }}
+                        />
+                        <IconButton type="submit" aria-label="search">
+                            <SearchIcon></SearchIcon>
+                        </IconButton>
+                    </Stack>
                 </Toolbar>
             </AppBar>
 
@@ -108,50 +132,7 @@ const HomeAdmin = () => {
                         alignSelf: "center",
                         justifyContent: "center",
                     }}
-                >HỌC SQL</h1>
-                <form
-                    style={{
-                        width: "60vw",
-                        display: "flex",
-                        alignSelf: "center",
-                        justifyContent: "center",
-                        flexDirection: "row",
-                        margin: 0,
-                        padding: 0,
-                    }}
-                >
-                    <TextField
-                        id="search-bar"
-                        className="text"
-                        placeholder="Tìm kiếm khóa học. Ví dụ: SQL cơ bản,..."
-                        style={{
-                            width:"80vw",
-                            height: "6vh",
-                            backgroundColor: "white",
-                            display: "flex",
-                            alignSelf: "center",
-                            justifyContent: "center",
-
-                        }}
-                    />
-                    <IconButton type="submit" aria-label="search">
-                        <SearchIcon
-                            style={{
-                                width:"5vw",
-                                height: "6vh",
-                                padding: 0,
-                                margin: 0,
-                                backgroundColor: "white",
-                                display: "flex",
-                                alignSelf: "center",
-                                justifyContent: "center",
-                                fill: "white",
-                                backgroundColor: "#157EF",
-                            }}
-                        />
-                    </IconButton>
-                </form>
-
+                >SQL</h1>
             </div>
 
         </div>

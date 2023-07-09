@@ -1,93 +1,111 @@
-import React, { useState } from 'react'
-import {Link} from 'react-router-dom'
+import * as React from 'react';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import CssBaseline from '@mui/material/CssBaseline';
+import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import {Wrapper, PopupLoginWrapper, Text, Row, Input, Button, Blank, Button2, Button3, Button4, Header} from './loginStyle'
-import logo from './logo.jpg'
+import Link from '@mui/material/Link';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-const Login = () => {
-  const [state, setState] = useState({
-    userName: '',
-    password: 0,
-  })
 
-  const signup = () => {
-    window.location.replace('/signup')
-  }
-  const login = () => {
-    const params = {
-      userName: state.userName,
-      password: state.password,
-    }
-  }
+// TODO remove, this demo shouldn't need to reset the theme.
 
-  const handleUserName = (event) => {
-    setState({ ...state, userName: event.target.value })
-  }
-
-  const handlePassword = (event) => {
-    setState({ ...state, password: event.target.value })
-  }
-
-  return (
-    <Wrapper>
-    <Header>
-      <Link to="/">
-        <Button2>
-          <img src={logo} width='150px'/>
-        </Button2>
-      </Link>
-    </Header>
-      <PopupLoginWrapper>
-        <Text color="#292929" fontSize={22} fontWeight="bold" paddingBottom={1} width="fit-content" paddingTop={1}>
-            Đăng nhập
-        </Text>
-        <Row>
-          <Text color="#4F4F4F" fontSize={18}>
-            Tên đăng nhập
-          </Text>
-          <Input value={state.userName} onChange={handleUserName} />
-        </Row>
-        <Blank height={0.2} width="fit-content"/>
-        <Row>
-          <Text color="#4F4F4F" fontSize={18}>
-            Mật khẩu
-          </Text>
-          <Input
-            //value={state.password}
-            onChange={handlePassword}
-            type="password"
-          />
-        </Row>
-        <FormControlLabel
-          control={<Checkbox value="remember" color="primary" />}
-          label="Remember me"
-      />
-        <Link to="forgot">
-          <Button3>
-              <Text color="#4F4F4F" fontSize={12} paddingTop={0.2}>
-                  Quên mật khẩu?
-              </Text>
-          </Button3>
-        </Link>
-        <Link to="/" style={{alignSelf: 'center'}}>
-          <Button>
-              <Text color="#FFFFFF" fontSize={16}>
-                  Đăng nhập
-              </Text>
-          </Button>
-        </Link>
-        <Link to="signup" style={{alignSelf: 'center'}}>
-          <Button4>
-              <Text color="#000000" fontSize={13} paddingTop={0.2}>
-                  Bạn chưa có tài khoản? <span style={{color: '#0366FF'}}
-              onClick={signup}> Đăng ký </span>
-              </Text>
-          </Button4>
-        </Link>
-      </PopupLoginWrapper>
-    </Wrapper>
-  )
+const defaultTheme = createTheme();
+const home = () => {
+  window.location.replace('/')
+}
+const forgot = () => {
+  window.location.replace('/forgot')
+}
+const signup = () => {
+  window.location.replace('/signup')
 }
 
-export default Login
+
+
+
+export default function Login() {
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    console.log({
+      email: data.get('email'),
+      password: data.get('password'),
+    });
+  };
+
+  return (
+      <ThemeProvider theme={defaultTheme}>
+        <Container component="main" maxWidth="xs">
+          <CssBaseline />
+          <Box
+              sx={{
+                marginTop: 8,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+              }}
+          >
+            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+              <LockOutlinedIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+              Login
+            </Typography>
+            <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+              <TextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="username"
+                  label="Uasername"
+                  name="username"
+                  autoFocus
+              />
+              <TextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="password"
+                  label="Password"
+                  type="password"
+                  id="password"
+                  autoComplete="current-password"
+              />
+              <FormControlLabel
+                  control={<Checkbox value="remember" color="primary" />}
+                  label="Remember me"
+              />
+              <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  sx={{ mt: 3, mb: 2 }}
+                  onClick={home}
+              >
+                Login
+              </Button>
+              <Grid container>
+                <Grid item xs>
+                  <Link href="#" variant="body2" onClick={forgot}>
+                    Forgot password?
+                  </Link>
+                </Grid>
+                <Grid item>
+                  <Link href="#" variant="body2" onClick={signup}>
+                    {"Don't have an account? Sign Up"}
+                  </Link>
+                </Grid>
+              </Grid>
+            </Box>
+          </Box>
+        </Container>
+      </ThemeProvider>
+  );
+}

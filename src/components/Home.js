@@ -14,6 +14,8 @@ import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from "@mui/icons-material/Search";
 import Stack from '@mui/material/Stack';
 import logo from '../img/SQL_logo.png'
+import homeimg from '../img/home.jpg';
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,6 +35,9 @@ const home = () => {
 
 const listcourse = () => {
   window.location.replace('/listcourse')
+}
+const profile = () => {
+    window.location.replace('/profile')
 }
 
 const login = () => {
@@ -67,9 +72,34 @@ const Home = () => {
               }}
             >Khóa Học</Button>
           </Typography>
+            <Stack spacing={2} direction="row" border={0} style={{marginLeft:20, marginRight: 150, borderRadius: 15}}>
+                <TextField
+                    id="search-bar"
+                    className="text"
+                    placeholder="Search"
+                    style={{
+                        marginLeft: 30,
+                        width:"50vw",
+                        height: "3vh",
+                        backgroundColor: "white",
+                        display: "flex",
+                        alignSelf: "center",
+                        justifyContent: "center",
+                    }}
+                    InputProps={{
+                        style: {
+                            borderRadius: "30px",
+                        }
+                    }}
+                />
+                <IconButton type="submit" aria-label="search">
+                    <SearchIcon></SearchIcon>
+                </IconButton>
+            </Stack>
           <Stack spacing={2} direction="row">
               <Button variant="contained" onClick={sigup} >Đăng ký</Button>
               <Button variant="outlined" onClick={login}>Đăng nhập</Button>
+              <AccountCircleIcon onClick={profile}></AccountCircleIcon>
           </Stack>
         </Toolbar>
       </AppBar>
@@ -83,20 +113,17 @@ const Home = () => {
           alignSelf: "center",
           justifyContent: "center",
           flexDirection: "column",
-          
+
         }}>
-          <h1
-            style={{
-              color:"white",
-              fontSize: "100px",
-              margin: 0,
-              padding: "30px",
-              display: "flex",
-              alignSelf: "center",
-              justifyContent: "center",
-            }}
-          >HỌC SQL</h1>
-          <form 
+          <img
+            src={homeimg}
+            max-width={100}
+            max-height={60}
+            //   width={1200}
+            // height={700}
+          ></img>
+
+          <form
           style={{
             width: "60vw",
             display: "flex",
@@ -107,40 +134,94 @@ const Home = () => {
             padding: 0,
           }}
           >
-            <TextField
-              id="search-bar"
-              className="text"
-              placeholder="Tìm kiếm khóa học. Ví dụ: SQL cơ bản,..."
-              style={{
-                width:"80vw",
-                height: "6vh",
-                backgroundColor: "white",
+
+          </form>
+      </div>
+        <div
+            style={{
+                width: "100vw",
+                height:"40vh",
+                backgroundColor: "#071A30",
                 display: "flex",
                 alignSelf: "center",
                 justifyContent: "center",
-                
-              }}
-            />
-            <IconButton type="submit" aria-label="search">
-              <SearchIcon  
-                style={{
-                  width:"5vw",
-                  height: "6vh",
-                  padding: 0,
-                  margin: 0,
-                  backgroundColor: "white",
-                  display: "flex",
-                  alignSelf: "center",
-                  justifyContent: "center",
-                  fill: "white",
-                  backgroundColor: "#157EF",
-                }}
-              />
-            </IconButton>
-          </form>
+                flexDirection: "column",
 
-      </div>
-    
+            }}>
+            <table style={{textAlign:"center", color:"white"}} >
+                <th colSpan={5} style={{marginBottom:15, height:50}}>
+                    THÀNH VIÊN NHÓM 5
+                </th>
+                <tr style={{fontWeight:"bold", marginBottom:10, height:50}}>
+                    <td>
+                        Lớp
+                    </td>
+                    <td>
+                        Mã sinh viên
+                    </td>
+                    <td>
+                        Tên
+                    </td>
+                    <td>
+                        Số điện thoại
+                    </td>
+                    <td>
+                        Email
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        TT33H7
+                    </td>
+                    <td>
+                        A40877
+                    </td>
+                    <td>
+                        Nguyễn Tuấn Anh
+                    </td>
+                    <td>
+                        0833515743
+                    </td>
+                    <td>
+                        nguyentuananhh152@gmail.com
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        TT33G1
+                    </td>
+                    <td>
+                        A38956
+                    </td>
+                    <td>
+                        Lê Anh Quân
+                    </td>
+                    <td>
+                        0395738630
+                    </td>
+                    <td>
+                        theanh1990xhn@gmail.com
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        TT32G1
+                    </td>
+                    <td>
+                        A35532
+                    </td>
+                    <td>
+                        Nguyễn Minh Hiếu
+                    </td>
+                    <td>
+                        0969073513
+                    </td>
+                    <td>
+                        potato.mhn@gmail.com
+                    </td>
+                </tr>
+            </table>
+        </div>
     </div>
   );
 
@@ -148,16 +229,3 @@ const Home = () => {
 
 export default Home;
 
-// export default function Home() {
-//   return (
-//     <Container>
-        
-//         <Paper>
-//             <h1>
-//                 This is home page
-//             </h1>
-//         </Paper>
-//     </Container>
-  
-//   );
-// }

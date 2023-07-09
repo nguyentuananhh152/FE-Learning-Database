@@ -4,7 +4,7 @@ import { Container, Paper } from '@material-ui/core';
 import { Button, Table } from '@mui/material';
 import Image from "material-ui-image";
 import Stack from '@mui/material/Stack';
-import logo from './SQL_logo.png'
+import logo from '../SQL_logo.png'
 import Typography from '@material-ui/core/Typography';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -13,7 +13,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import NotificationsIcon from '@mui/icons-material/Notifications'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import SearchIcon from '@mui/icons-material/Search';
-import { divCourse, imgCourse } from '../ListCourseStyle';
+import { divCourse, imgCourse } from '../../ListCourseStyle';
 import { Link } from 'react-router-dom';
 
 
@@ -48,6 +48,10 @@ const accountmanagement = () => {
     window.location.replace('/accountmanagement')
 }
 
+const profile = () => {
+    window.location.replace('/profile')
+}
+
 const notificationmanagement = () => {
     window.location.replace('/notificationmanagement')
 }
@@ -56,25 +60,26 @@ const toSeeMore = () =>{
     window.location.replace('/admin/SeeMore')
 }
 const toCourse = () =>{
-    window.location.replace('/Course')
+    window.location.replace('/admin/editcourse')
 }
-const AddCourse = () => {
+
+const addCourse = () =>{
+    window.location.replace('/admin/addcourse')
+}
+const CourseManagement = () => {
     const[ListCourse, setListCourse]=useState([])
 
-    // const addCourse = (id, name) => {
-    //     fetch("http://localhost:8081/")
-    // }
     useEffect(()=> {
-        const unloadCallback = (event) => {
-            event.preventDefault();
-            event.returnValue = "";
-            return "";
-          };
-        
-          window.addEventListener("beforeunload", unloadCallback);
-          return () => window.removeEventListener("beforeunload", unloadCallback);
+        const urlOnline = `https://web-service-back-end-group-3-cnpm.onrender.com/get-all-list-course`;
+        const url = `http://localhost:8081/get-all-list-course`
+        fetch(urlOnline)
+            .then(res => res.json())
+            .then((result) => {
+                    setListCourse(result);
+                    console.log(ListCourse);
+                }
+            )
     },[])
-
     const classes = useStyles();
     return(
         <div
@@ -104,24 +109,24 @@ const AddCourse = () => {
                                 style={{
                                     fontWeight: "bold",
                                 }}
-                        >Quản Lý Khóa Học</Button>
+                        >Course Management</Button>
                         <Button color="inherit" onClick={lessonmanagement}
                                 style={{
                                     fontWeight: "bold",
                                 }}
-                        >Quản Lý Bài Học</Button>
+                        >Lesson Management</Button>
                         <Button color="inherit" onClick={accountmanagement}
                                 style={{
                                     fontWeight: "bold",
                                 }}
-                        >Quản Lý Tài Khoản</Button>
+                        >Account Management</Button>
                         <Button color="inherit" onClick={notificationmanagement}
                                 style={{
                                     fontWeight: "bold",
                                 }}
-                        >Quản Lý Thông Báo</Button>
+                        >MNotification Management</Button>
                         <SearchIcon />
-                        <AccountCircleIcon></AccountCircleIcon>
+                        <AccountCircleIcon onClick={profile}></AccountCircleIcon>
                     </Stack>
                 </Toolbar>
             </AppBar>
@@ -134,38 +139,25 @@ const AddCourse = () => {
                     flexDirection: "row",
                 }}
             >
-                <form>
-                    <table>
-                        <tr>
-                            <td>
-                                <label>Mã</label>
-                            </td>
-                            <td>
-                                <input></input>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label>Tên Khóa Học</label>
-                            </td>
-                            <td>
-                                <input></input>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label>Bài Học</label>
-                            </td>
-                            <td>
-                            <select></select>
-                            </td>
-                        </tr>
-                    </table>
-                </form>
-                
+                {ListCourse.map((w,index)=>{
+                        return <divCourse>
+                            <h1>{w.name}</h1>
+                            <img style={{ width: 350, height: 300, marginRight: 50,}} src={w.image}/>
+
+                            <Stack spacing={2} direction="row">
+                                <Button variant="contained" onClick={toCourse}>Edit</Button>
+                                <Button variant="outlined" onClick={toSeeMore}>Detail</Button>
+                            </Stack>
+
+                        </divCourse>
+
+                    },
+
+                )}
+                <br></br>
             </Container>
             <div style={{width:"auto", height:300, textAlign:"right"}}>
-                <Button style={{fontSize:15, width:110, height:45, marginRight:100, marginTop: 100, backgroundColor: "blue", borderRadius:20} }><p style={{color:"white"}}>Gửi</p></Button>
+                <Button style={{fontSize:40, width:30, height:60, marginRight:100, marginTop: 100, backgroundColor: "blue", borderRadius:60} } onClick={addCourse}><p style={{color:"white"}}>+</p></Button>
             </div>
         </div>
 
@@ -173,5 +165,36 @@ const AddCourse = () => {
 
 }
 
-export default AddCourse;
+export default CourseManagement;
 
+//   return (
+//     <Container>
+//         <form>
+//             <h1 style={{color:"blue"}}>List Course</h1>
+//             {ListCourse.map((w,index)=>{
+//             return  <Table border="1px" style={{whiteSpace: "normal", wordWrap: "break-word", marginTop:"50px"}}>
+//                 <tr>
+//                     <td width="130px" colSpan={2}>
+//                         <img style={{ width: 350, height: 300 }} src={w.image} onClick={listlesson}/>
+//                     </td>
+//                 </tr>
+//                 <tr>
+//                     <td width="500px">
+//                         <TextField id="outlined-basic" inputProps={{min: 0, style: { textAlign: 'center'}}} label="Desctiption" variant="outlined" width="400px" fullWidth
+//                         value={w.description}
+//                         />
+//                     </td>
+//                     <td>
+//                     <TextField inputProps={{min: 0, style: { textAlign: 'center', fontWeight: 'bold'}}} disabled="disabled" fullWidth value={w.name} ></TextField>
+//                     </td>
+//                 </tr>
+//             </Table>
+
+//             },
+
+//             )}
+//         </form>
+//     </Container>
+
+//   );
+// }

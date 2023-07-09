@@ -11,6 +11,7 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  border-bottom-left-radius: 15px;
 
   ${({ hover }) =>
     hover &&
@@ -32,7 +33,7 @@ export const SearchInput = styled.input`
   outline: 0;
   border: 0;
   font-size: 20px;
-  border-radius: 20px;
+  border-radius: 50px;
   display: ${(props) => (props.showSearchInput ? "block" : "none")};
 `;
 

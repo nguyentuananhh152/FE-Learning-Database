@@ -1,69 +1,85 @@
-import React, { useState } from 'react'
-import {Link} from 'react-router-dom'
-import {Wrapper, PopupLoginWrapper, Text, Row, Input, Button, Blank, Button2, Header} from './forgotStyle'
-import logo from '../login/logo.jpg'
+import * as React from 'react';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import CssBaseline from '@mui/material/CssBaseline';
+import TextField from '@mui/material/TextField';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import Link from '@mui/material/Link';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-const Forgot = () => {
-  const [state, setState] = useState({
-    userName: '',
-    password: 0,
-  })
 
-  const login = () => {
-    const params = {
-      userName: state.userName,
-      password: state.password,
-    }
-  }
+// TODO remove, this demo shouldn't need to reset the theme.
 
-  const handleUserName = (event) => {
-    setState({ ...state, userName: event.target.value })
-  }
-
-  const handlePassword = (event) => {
-    setState({ ...state, password: event.target.value })
-  }
-
-  return (
-    <Wrapper>
-    <Header>
-      <Link to="/">
-        <Button2>
-          <img src={logo} width='150px'/>
-        </Button2>
-      </Link>
-    </Header>
-      <PopupLoginWrapper>
-        <Text color="#292929" fontSize={22} fontWeight="bold" paddingBottom={1} width="fit-content" paddingTop={1}>
-            Quên mật khẩu
-        </Text>
-        <Row>
-          <Text color="#4F4F4F" fontSize={18}>
-            Tên đăng nhập
-          </Text>
-          <Input value={state.userName} onChange={handleUserName} />
-        </Row>
-        <Blank height={0.2} width="fit-content"/>
-        <Row>
-          <Text color="#4F4F4F" fontSize={18}>
-            Email
-          </Text>
-          <Input
-            //value={state.password}
-            onChange={handlePassword}
-            type="password"
-          />
-        </Row>
-        <Link to="/login" style={{alignSelf: 'center'}}>
-          <Button>
-              <Text color="#FFFFFF" fontSize={16}>
-                  Gửi
-              </Text>
-          </Button>
-        </Link>
-      </PopupLoginWrapper>
-    </Wrapper>
-  )
+const defaultTheme = createTheme();
+const home = () => {
+  window.location.replace('/')
+}
+const forgot = () => {
+  window.location.replace('/forgot')
+}
+const signup = () => {
+  window.location.replace('/signup')
 }
 
-export default Forgot
+
+
+
+export default function Forgot() {
+  return (
+      <ThemeProvider theme={defaultTheme}>
+        <Container component="main" maxWidth="xs">
+          <CssBaseline />
+          <Box
+              sx={{
+                marginTop: 8,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+              }}
+          >
+            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+              <LockOutlinedIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+              Forgot Password
+            </Typography>
+            <Box component="form" noValidate sx={{ mt: 1 }}>
+              <TextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="email"
+                  label="Email Address"
+                  name="email"
+                  autoComplete="email"
+                  autoFocus
+              />
+              <TextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="username"
+                  label="Usewrname"
+                  id="username"
+              />
+              <Button
+                  // type="submit"
+                  fullWidth
+                  variant="contained"
+                  sx={{ mt: 3, mb: 2 }}
+                  onClick={home}
+              >
+                Submit
+              </Button>
+            </Box>
+          </Box>
+        </Container>
+      </ThemeProvider>
+  );
+}
