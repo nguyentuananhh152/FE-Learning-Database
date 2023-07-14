@@ -11,7 +11,7 @@ export default function ListLesson() {
   useEffect(()=> {
       const urlOnline = `https://web-service-back-end-group-3-cnpm.onrender.com/get-all-list-course/get-list-lesson?id=1`;
       const url = `http://localhost:8081/get-list-lesson?id=1`;
-    fetch(urlOnline)
+    fetch(url)
         .then(res => res.json())
         .then((result) => {
             setListLesson(result);
@@ -19,7 +19,7 @@ export default function ListLesson() {
         }
     )
   },[])
-
+    const [content, setContent] = useState('')
 
   return (
     <Container>

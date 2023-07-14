@@ -15,6 +15,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import SearchIcon from '@mui/icons-material/Search';
 import { divCourse, imgCourse } from '../../ListCourseStyle';
 import { Link } from 'react-router-dom';
+import avatarDefault from "../profile/avatar.png";
 
 
 const listlesson = () => {
@@ -40,19 +41,33 @@ const home = () => {
 const coursemanagement = () => {
     window.location.replace('/coursemanagement')
 }
+
+const chooseFile = (e) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+        if (reader.readyState === 2) {
+            this.setState({ profileImg: reader.result });
+        }
+    };
+    reader.readAsDataURL(e.target.files[0]);
+}
 const AddCourse = () => {
     const[ListCourse, setListCourse]=useState([])
 
     useEffect(()=> {
-        const unloadCallback = (event) => {
-            event.preventDefault();
-            event.returnValue = "";
-            return "";
-          };
-        
-          window.addEventListener("beforeunload", unloadCallback);
-          return () => window.removeEventListener("beforeunload", unloadCallback);
-    },[])
+            if (JSON.parse(localStorage.getItem("checkLoginAdmin")) === true) {
+                const unloadCallback = (event) => {
+                    event.preventDefault();
+                    event.returnValue = "";
+                    return "";
+                };
+
+                window.addEventListener("beforeunload", unloadCallback);
+                return () => window.removeEventListener("beforeunload", unloadCallback);
+            } else {
+                window.location.replace('/admin/login')
+            }
+        },[])
 
     const classes = useStyles();
     return(
@@ -85,8 +100,8 @@ const AddCourse = () => {
                 }}
             >
                 <div  style={{
-                            width:"30vw", height:"5vw", boxShadow: "1px 3px 1px #9E9E9E", borderRadius:30, backgroundColor:"white"}}>
-                        <table style={{marginRight:"auto", marginLeft:"auto"}}>
+                            width:"30vw", height:"20vw", boxShadow: "1px 3px 1px #9E9E9E", borderRadius:30, backgroundColor:"white"}}>
+                        <table style={{marginRight:"auto", marginLeft:"auto", marginTop: 50}}>
                             <tr>
                                 <td>
                                     <label>ID</label>
@@ -105,6 +120,20 @@ const AddCourse = () => {
                             </tr>
                             <tr>
                                 <td>
+                                    <label>Image</label>
+                                </td>
+                                <td>
+                                    <input
+                                        type="file"
+                                        accept="image/*"
+                                        name="image-upload"
+                                        id="input"
+                                        onChange={chooseFile}
+                                    />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
                                     <label>Lessons</label>
                                 </td>
                                 <td>
@@ -116,6 +145,7 @@ const AddCourse = () => {
             </Container>
             <div style={{width:"auto", height:300, textAlign:"right", backgroundColor:"#efd3d7"}}>
                 <Button style={{fontSize:15, width:110, height:45, marginRight:100, marginTop: 100, backgroundColor: "blue", borderRadius:20} }><p style={{color:"white"}} onClick={coursemanagement}>Submit</p></Button>
+                {/*<Button variant="contained" onClick={window.location.replace('/admin/home')} style={{marginTop:30, marginRight:30}}>Cancel</Button>*/}
             </div>
         </div>
 

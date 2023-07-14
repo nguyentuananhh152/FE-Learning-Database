@@ -29,6 +29,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
 const home = () => {
   window.location.replace('/')
 }
@@ -48,7 +49,29 @@ const sigup = () => {
     window.location.replace('/signup')
 }
 
+const infor = {
+    id: 0,
+    name: "",
+    age: 0,
+    address: "",
+    email: "",
+    username: ""
+};
+var user = JSON.stringify(infor);
+// const checkLogin = false;
+
+
 const Home = () => {
+    useEffect(()=> {
+        localStorage.removeItem("admin")
+        localStorage.removeItem("checkLoginAdmin")
+        if (localStorage.getItem("user") === null) {
+            localStorage.setItem("user", user)
+        }
+        if (localStorage.getItem("checkLogin") === null) {
+            localStorage.setItem("checkLogin", false)
+        }
+    },[])
   const classes = useStyles();
   return(
     <div

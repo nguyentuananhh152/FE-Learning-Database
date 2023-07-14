@@ -31,9 +31,6 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
     window.location.replace('/Course')
   }
 
-  const toExercise = () => {
-    window.location.replace('/Exercise')
-  }
   const closeDiv = () =>{
     var x = document.getElementById("listExercise");
     if (x.style.display === "none") {
@@ -128,7 +125,7 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
                 flexDirection: "column",
                 marginLeft: "30px",
             }}>
-                <h2>Bài Tập:</h2>
+                <h2>Exercises</h2>
                 <p style={{fontSize: "20px"}}>Viết câu lệnh SQL để tạo một cơ sở dữ liệu mới được gọi la testDB</p>
                 <div
                     style={{
@@ -141,7 +138,7 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
                     }}
                 >
                     <TextField
-                        placeholder="Câu trả lời..."
+                        placeholder="Your answer.."
                         style={{
                             backgroundColor: "white",
                             width: "50vw",
@@ -162,7 +159,7 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
                                     backgroundColor: "#157EFB",
                                     padding: "10px"
                                 }}
-                        >Đáp án</Button>
+                        >Submit</Button>
                     </div>
                 </div>
                 <Button
@@ -173,7 +170,7 @@ import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
                         padding: "10px",
                         marginTop: "20px"
                     }}
-                >Nộp</Button>
+                >Key</Button>
 
             </div>
         </div>

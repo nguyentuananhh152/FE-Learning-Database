@@ -27,6 +27,16 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+const infor = {
+    id: 0,
+    name: "",
+    age: 0,
+    address: "",
+    email: "",
+    username: ""
+};
+var admin = JSON.stringify(infor);
+
 const home = () => {
     window.location.replace('/admin/home')
 }
@@ -56,6 +66,17 @@ const login = () => {
 
 
 const HomeAdmin = () => {
+    useEffect(()=> {
+        localStorage.removeItem("user")
+        localStorage.removeItem("checkLogin")
+        if (localStorage.getItem("admin") === null) {
+            localStorage.setItem("admin", admin)
+        }
+        if (localStorage.getItem("checkLoginAdmin") === null) {
+            localStorage.setItem("checkLogin", false)
+        }
+    },[])
+
     const classes = useStyles();
     return(
         <div
@@ -119,7 +140,7 @@ const HomeAdmin = () => {
                         </IconButton>
                     </Stack>
                     <Stack spacing={2} direction="row">
-                        <Button variant="outlined" onClick={login}>Login</Button>
+                        <Button variant="contained" onClick={login}>Login</Button>
                         <AccountCircleIcon onClick={profile}></AccountCircleIcon>
                     </Stack>
                 </Toolbar>
@@ -129,24 +150,33 @@ const HomeAdmin = () => {
                 style={{
                     width: "100vw",
                     height:"100vh",
-                    backgroundColor: "#071A30",
+                    backgroundColor: "#2f527c",
                     display: "flex",
                     alignSelf: "center",
                     justifyContent: "center",
                     flexDirection: "column",
 
                 }}>
-                <h1
+                <h2
                     style={{
                         color:"white",
-                        fontSize: "100px",
+                        fontSize: "250px",
                         margin: 0,
                         padding: "30px",
                         display: "flex",
                         alignSelf: "center",
                         justifyContent: "center",
                     }}
-                >SQL</h1>
+                >SQL </h2>
+                <h1 style={{
+                    color:"white",
+                    fontSize: "80px",
+                    margin: 0,
+                    padding: "30px",
+                    display: "flex",
+                    alignSelf: "center",
+                    justifyContent: "center",
+                }}>MANAGEMENT</h1>
             </div>
 
         </div>

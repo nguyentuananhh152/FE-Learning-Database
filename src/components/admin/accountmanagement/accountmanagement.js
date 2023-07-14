@@ -42,16 +42,22 @@ const LessonManagement = () => {
     const[Account, setListAccount]=useState([])
 
     useEffect(()=> {
-        const urlOnline = `https://web-service-back-end-group-3-cnpm.onrender.com/get-all-account`;
-        const url = `http://localhost:8081/get-all-account`;
-        fetch(urlOnline)
-            .then(res => res.json())
-            .then((result) => {
-                    setListAccount(result);
-                    console.log(Account);
-                }
-            )
+        if (JSON.parse(localStorage.getItem("checkLoginAdmin")) === true) {
+            const urlOnline = `https://web-service-back-end-group-3-cnpm.onrender.com/get-all-account`;
+            const url = `http://localhost:8081/get-all-account`;
+            fetch(url)
+                .then(res => res.json())
+                .then((result) => {
+                        setListAccount(result);
+                        console.log(Account);
+                    }
+                )
+        } else {
+            window.location.replace('/admin/login')
+        }
     },[])
+
+
     const classes = useStyles();
     return(
         <div

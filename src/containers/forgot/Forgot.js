@@ -20,8 +20,8 @@ const defaultTheme = createTheme();
 const home = () => {
   window.location.replace('/')
 }
-const forgot = () => {
-  window.location.replace('/forgot')
+const signin = () => {
+  window.location.replace('/login')
 }
 const signup = () => {
   window.location.replace('/signup')
@@ -73,7 +73,7 @@ export default function Forgot() {
                   fullWidth
                   variant="contained"
                   sx={{ mt: 3, mb: 2 }}
-                  onClick={home}
+                  onClick={signin}
               >
                 Submit
               </Button>

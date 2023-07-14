@@ -35,22 +35,33 @@ const listcourse = () => {
     window.location.replace('/coursemanagement')
 }
 
+const i = 0;
+
+
+
 
 const EditCourse = () => {
-    const[Course, setListLesson]=useState([])
+    const[listLesson, setListLesson]=useState([])
+    const[lesson, setLesson] = useState({})
+
 
     useEffect(()=> {
-        const urlOnline = `https://web-service-back-end-group-3-cnpm.onrender.com/get-list-lesson?id=1`;
+        if (JSON.parse(localStorage.getItem("checkLoginAdmin")) === true) {
+            // const urlOnline = `https://web-service-back-end-group-3-cnpm.onrender.com/get-list-lesson?id=1`;
 
-        const url = `http://localhost:8081/get-list-lesson?id=1`;
-        fetch(urlOnline)
-            .then(res => res.json())
-            .then((result) => {
-                    setListLesson(result);
-                    console.log(Course);
-                }
-            )
+            const url = `http://localhost:8081/get-list-lesson?id=1`;
+            fetch(url)
+                .then(res => res.json())
+                .then((result) => {
+                        setListLesson(result);
+                        console.log(result);
+                    }
+                )
+        } else {
+            window.location.replace('/admin/login')
+        }
     },[])
+
     const classes = useStyles();
     return(
         <div
@@ -105,7 +116,7 @@ const EditCourse = () => {
                     }}
                 >
                     <h2>Basic SQL</h2>
-                    {Course.map((w,index)=>{
+                    {listLesson.map(w => {
                             return <Stack spacing={2} direction="row"
                                           style={{
                                               marginLeft: "10px",
@@ -116,9 +127,10 @@ const EditCourse = () => {
                                     style={{
                                         color: "black",
                                     }}
-                                >{w.content}</Button>
+                                    onClick={() => setLesson(w)}
+                                >{w.name}</Button>
                             </Stack>
-                        },
+                        }
                     )}
 
 
@@ -126,25 +138,36 @@ const EditCourse = () => {
 
                 </div>
                 <div style={{
-                    width: "80vw",
+                    width: "76vw",
                     display: "flex",
                     flexDirection: "column",
                     marginLeft: "15px",
+                    backgroundColor:"#dbdbdb"
                 }}>
                     <div
-                        style={{
-                            borderBottom: "solid",
-                            borderBottomWidth: "1px",
-                        }}
+                        // style={{
+                        //     borderBottom: "solid",
+                        //     borderBottomWidth: "1px",
+                        // }}
                     >
-                        <h2>Edit Course</h2>
-                        <p>Id lesson: id</p>
-                        <p>Name of lesson: name</p>
+                        <h2 style={{margin:30}}>Edit Course</h2>
+                        <div style={{
+                            margin: 30,
+                            backgroundColor: "white",
+                            borderRadius:5,
+                            boxShadow: "1px 3px 1px #9E9E9E",
+                            padding:20
+                        }}>
+
+                            <p>
+                                {lesson.content}
+                            </p>
+                        </div>
                         <Button
                             style={{
                                 color: "white",
                                 backgroundColor: "#157EFB",
-                                margin: "10px",
+                                margin: "30px",
                             }}
                         >Add Lesson</Button>
                         <Button
@@ -159,7 +182,7 @@ const EditCourse = () => {
                         <div style={{
                             display: "flex",
                             flexDirection: "row",
-                            marginBottom: "10px",
+                            margin: 30
                         }}>
                             <Button
                                 style={{
@@ -171,8 +194,7 @@ const EditCourse = () => {
                                 style={{
                                     color: "white",
                                     backgroundColor: "#157EFB",
-                                    position: "absolute",
-                                    right: "0px",
+                                    marginLeft: 50
                                 }}
                             >Next</Button>
 

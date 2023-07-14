@@ -63,7 +63,7 @@ function App() {
               <Route path="/admin/addcourse" element={<AddCourse/>} />
             {/*Lesson*/}
               <Route path="/lessonmanagement" element={<LessonManagement/>} />
-
+              {/*<Route path="/admin/addlesson" element={<AddCourse/>} />*/}
 
             {/*Notification*/}
               <Route path="/notificationmanagement" element={<NotificationManagement/>} />

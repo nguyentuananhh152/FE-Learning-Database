@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import './Profile.css';
 import avatarDefault from './avatar.png'
+import {Button} from "@mui/material";
 
 const profile = () => {
     window.location.replace('/profile')
@@ -133,9 +134,8 @@ export class EditProfile extends Component {
                                         </tr>
                                     </table>
                                 </div>
-                                <button className="btn btn-outline-dark" type="submit" onClick={profile}>
-                                    Submit
-                                </button>
+                                <Button variant="contained" onClick={profile} style={{marginTop:30, marginRight:30}}>Submit</Button>
+                                <Button variant="contained" onClick={profile} style={{marginTop:30}}>Cancel</Button>
                             </div>
                         </div>
                     </div>

@@ -41,17 +41,23 @@ const listcourse = () => {
 const LessonManagement = () => {
     const[Notifications, setNotifications]=useState([])
 
+
     useEffect(()=> {
-        const urlOnline = `https://web-service-back-end-group-3-cnpm.onrender.com/get/notifications`;
-        const url = `http://localhost:8081/get/notifications`;
-        fetch(urlOnline)
-            .then(res => res.json())
-            .then((result) => {
-                    setNotifications(result);
-                    console.log(Notifications);
-                }
-            )
+        if (JSON.parse(localStorage.getItem("checkLoginAdmin")) === true) {
+            const urlOnline = `https://web-service-back-end-group-3-cnpm.onrender.com/get/notifications`;
+            const url = `http://localhost:8081/get/notifications`;
+            fetch(url)
+                .then(res => res.json())
+                .then((result) => {
+                        setNotifications(result);
+                        console.log(Notifications);
+                    }
+                )
+        } else {
+            window.location.replace('/admin/login')
+        }
     },[])
+
     const classes = useStyles();
     return(
         <div

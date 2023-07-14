@@ -53,15 +53,19 @@ const profile = () => {
     const[ListCourse, setListCourse]=useState([])
 
     useEffect(()=> {
-        const urlOnline = `https://web-service-back-end-group-3-cnpm.onrender.com/get-all-list-course`;
-        const url = `http://localhost:8081/get-all-list-course`
-        fetch(urlOnline)
-            .then(res => res.json())
-            .then((result) => {
-                setListCourse(result);
-                console.log(ListCourse);
-            }
-        )
+        if (JSON.parse(localStorage.getItem("checkLogin")) === true) {
+            const urlOnline = `https://web-service-back-end-group-3-cnpm.onrender.com/get-all-list-course`;
+            const url = `http://localhost:8081/get-all-list-course`
+            fetch(url)
+                .then(res => res.json())
+                .then((result) => {
+                        setListCourse(result);
+                        console.log(ListCourse);
+                    }
+                )
+        } else {
+            window.location.replace('/login')
+        }
     },[])
     const classes = useStyles();
     return(
@@ -72,6 +76,8 @@ const profile = () => {
           alignSelf: "center",
           justifyContent: "center",
           flexDirection: "column",
+
+
         }}
       >
         <AppBar position="static" color='white'>
@@ -104,17 +110,56 @@ const profile = () => {
             display: "flex",
             alignSelf: "center",
             justifyContent: "center",
-            flexDirection: "row",
+            flexDirection: "row"
         }}
         >
                 {ListCourse.map((w,index)=>{
-                return <divCourse>
-                            <h1>{w.name}</h1>
-                            <img style={{ width: 350, height: 300, marginRight: 50,}} src={w.image}/>
-                        
-                            <Stack spacing={2} direction="row">
-                                <Button variant="contained" onClick={toCourse}>Register</Button>
-                                <Button variant="outlined" onClick={toSeeMore}>Detail</Button>
+                return <divCourse
+                            style={{
+                                backgroundColor:"#f7ff82",
+                                color:"blue", width:1000,
+                                height:500,
+                                marginRight:10  ,
+                                marginLeft:10,
+                                boxShadow: "1px 3px 1px #9E9E9E",
+                                borderRadius:10,
+                                textAlign:"center"
+                        }}>
+                            <h1
+                                style={{
+                                    marginTop:20
+                            }}>
+                                {w.name}
+                            </h1>
+                            <img
+                                style={{
+                                    width: 350,
+                                    height: 300,
+                                    marginLeft:10,
+                                    marginRight:10
+                                }}
+                                src={w.image}
+                            />
+
+                            <Stack
+                                spacing={2}
+                                direction="row"
+                                style={{
+                                    marginLeft:70,
+                                    marginTop:30
+                            }}>
+                                <Button
+                                    variant="contained"
+                                    onClick={toCourse}
+                                >
+                                    Register
+                                </Button>
+                                <Button
+                                    variant="contained"
+                                    onClick={toSeeMore}
+                                >
+                                    Detail
+                                </Button>
                             </Stack>
                     
                 </divCourse>
@@ -122,6 +167,7 @@ const profile = () => {
                 },
                 
                 )}
+
         </Container>
         </div>
         
@@ -130,35 +176,3 @@ const profile = () => {
   }
   
   export default ListCourse;
-
-//   return (
-//     <Container>
-//         <form>
-//             <h1 style={{color:"blue"}}>List Course</h1>
-//             {ListCourse.map((w,index)=>{
-//             return  <Table border="1px" style={{whiteSpace: "normal", wordWrap: "break-word", marginTop:"50px"}}>
-//                 <tr>
-//                     <td width="130px" colSpan={2}>
-//                         <img style={{ width: 350, height: 300 }} src={w.image} onClick={listlesson}/>
-//                     </td>
-//                 </tr>
-//                 <tr>
-//                     <td width="500px">
-//                         <TextField id="outlined-basic" inputProps={{min: 0, style: { textAlign: 'center'}}} label="Desctiption" variant="outlined" width="400px" fullWidth
-//                         value={w.description}
-//                         />
-//                     </td>
-//                     <td>
-//                     <TextField inputProps={{min: 0, style: { textAlign: 'center', fontWeight: 'bold'}}} disabled="disabled" fullWidth value={w.name} ></TextField>
-//                     </td>
-//                 </tr>
-//             </Table>
-                        
-//             },
-            
-//             )}
-//         </form>
-//     </Container>
-  
-//   );
-// }

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, {Component, useEffect} from "react";
 import './Profile.css';
 import avatarDefault from './avatar.png'
 import Toolbar from "@material-ui/core/Toolbar";
@@ -6,17 +6,33 @@ import Typography from "@material-ui/core/Typography";
 import {Button} from "@mui/material";
 import logo from "../../img/SQL_logo.png";
 import AppBar from "@material-ui/core/AppBar";
+import TextField from "@mui/material/TextField";
 
 
 const edit = () => {
     window.location.replace('/profile/edit')
 }
 
+
+
+const logout = () => {
+    localStorage.clear()
+    window.location.replace('/')
+}
 const home = () => {
     window.location.replace('/')
 }
+let user;
 export class Profile extends Component {
+    constructor() {
+        super();
+        if (JSON.parse(localStorage.getItem("checkLogin")) === false) {
+            window.location.replace('/login')
+        }
+    }
 
+    user = JSON.parse(localStorage.getItem("user"));
+    // console.log(user);
 
     imageHandler = (e) => {
         const reader = new FileReader();
@@ -42,19 +58,19 @@ export class Profile extends Component {
                 </AppBar>
                 <div className="col-lg-5 col-md-6" style={{
                     width: "100vw",
-                    height:"60vh",
+                    height:"41vw",
                     display: "flex",
                     alignSelf: "center",
                     justifyContent: "center",
                     flexDirection: "column"}}>
-                    <div className="p-card card h-100" style={{marginRight:"auto", marginLeft:"auto", marginTop:50, width:"30vw", height:"30vw", borderRadius:50, boxShadow: "1px 3px 1px #9E9E9E"}}>
+                    <div className="p-card card h-100" style={{marginRight:"auto", marginLeft:"auto", width:"50vw", height:"34vw", borderRadius:50, boxShadow: "1px 3px 1px #9E9E9E"}}>
                         <div className="card-body" style={{marginTop:20}}>
                             <div className="account-settings">
                                 <div className="user-profile">
                                     <div class="user-avatar">
                                         <img src={avatarDefault} alt="" id="img" className="img" />
                                     </div>
-
+                                    <label>Student</label>
                                     <table
                                         style={{
                                             width:"20vw",
@@ -78,7 +94,24 @@ export class Profile extends Component {
                                                 </label>
                                             </td>
                                             <td>
-                                                <u>ID</u>
+                                                <TextField value={JSON.parse(localStorage.getItem("user")).id} disabled={"disable"}></TextField>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label
+                                                    htmlFor="fname"
+                                                    style={{color: "#000000"}}
+                                                    className="form-label"
+                                                    style={{
+                                                        fontWeight: "bold",
+                                                    }}
+                                                >
+                                                    Username
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <TextField value={JSON.parse(localStorage.getItem("user")).username} disabled={"disable"} style={{fontWeight:"bold"}}></TextField>
                                             </td>
                                         </tr>
                                         <tr>
@@ -95,7 +128,7 @@ export class Profile extends Component {
                                                 </label>
                                             </td>
                                             <td>
-                                                <u>Name</u>
+                                                <TextField value={JSON.parse(localStorage.getItem("user")).name} disabled={"disable"} style={{fontWeight:"bold"}}></TextField>
                                             </td>
                                         </tr>
                                         <tr>
@@ -112,7 +145,7 @@ export class Profile extends Component {
                                                 </label>
                                             </td>
                                             <td>
-                                                <u>Email</u>
+                                                <TextField value={JSON.parse(localStorage.getItem("user")).email} disabled={"disable"} style={{fontWeight:"bold"}}></TextField>
                                             </td>
                                         </tr>
                                         <tr>
@@ -129,7 +162,7 @@ export class Profile extends Component {
                                                 </label>
                                             </td>
                                             <td>
-                                                <u>Age</u>
+                                                <TextField value={JSON.parse(localStorage.getItem("user")).numberAge} disabled={"disable"} style={{fontWeight:"bold"}}></TextField>
                                             </td>
                                         </tr>
                                         <tr>
@@ -146,33 +179,18 @@ export class Profile extends Component {
                                                 </label>
                                             </td>
                                             <td>
-                                                <u>Address</u>
+                                                <TextField value={JSON.parse(localStorage.getItem("user")).address} disabled={"disable"} style={{fontWeight:"bold"}}></TextField>
                                             </td>
                                         </tr>
                                     </table>
                                 </div>
-                                <button className="btn btn-outline-dark" onClick={edit} style={{marginTop:40}}>
-                                    Edit
-                                </button>
+                                <Button variant="contained" onClick={edit} style={{marginTop:30, marginRight:30}}>Edit</Button>
+                                <Button variant="contained" onClick={logout} style={{marginTop:30}}>Logout</Button>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div
-                    style={{
-                    width: "100vw",
-                    height:"40vh",
-                    display: "flex",
-                    alignSelf: "center",
-                    justifyContent: "center",
-                    flexDirection: "column",
 
-                }}>
-
-                    <div className="d-grid gap-2" style={{marginTop:40}}>
-
-                    </div>
-                </div>
             </div>
         );
     }
